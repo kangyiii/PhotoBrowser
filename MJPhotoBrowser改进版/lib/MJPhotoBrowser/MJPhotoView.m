@@ -16,8 +16,9 @@
 {
     BOOL _doubleTap;
     UIImageView *_imageView;
-    MJPhotoLoadingView *_photoLoadingView;
+    MJPhotoLoadingView * _photoLoadingView;
 }
+@property (nonatomic,strong)MJPhotoLoadingView * photoLoadingView;
 @end
 
 @implementation MJPhotoView
@@ -128,11 +129,10 @@
 #pragma mark 加载完毕
 - (void)photoDidFinishLoadWithImage:(UIImage *)image
 {
+    [_photoLoadingView removeFromSuperview];
     if (image) {
         self.scrollEnabled = YES;
         _photo.image = image;
-        [_photoLoadingView removeFromSuperview];
-        
         if ([self.photoViewDelegate respondsToSelector:@selector(photoViewImageFinishLoad:)]) {
             [self.photoViewDelegate photoViewImageFinishLoad:self];
         }

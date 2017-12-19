@@ -12,7 +12,6 @@
 
 @interface MJPhotoLoadingView ()
 {
-    UILabel *_failureLabel;
     MJPhotoProgressView *_progressView;
 }
 
@@ -29,23 +28,23 @@
 {
     [_progressView removeFromSuperview];
     
-    if (_failureLabel == nil) {
-        _failureLabel = [[UILabel alloc] init];
-        _failureLabel.bounds = CGRectMake(0, 0, self.bounds.size.width, 44);
-        _failureLabel.textAlignment = NSTextAlignmentCenter;
-        _failureLabel.center = self.center;
-        _failureLabel.text = @"网络不给力，图片下载失败";
-        _failureLabel.font = [UIFont boldSystemFontOfSize:20];
-        _failureLabel.textColor = [UIColor whiteColor];
-        _failureLabel.backgroundColor = [UIColor clearColor];
-        _failureLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    if (self.failureLabel == nil) {
+        self.failureLabel = [[UILabel alloc] init];
+        self.failureLabel.bounds = CGRectMake(0, 0, self.bounds.size.width, 44);
+        self.failureLabel.textAlignment = NSTextAlignmentCenter;
+        self.failureLabel.center = self.center;
+        self.failureLabel.text = @"网络不给力，图片下载失败";
+        self.failureLabel.font = [UIFont boldSystemFontOfSize:20];
+        self.failureLabel.textColor = [UIColor whiteColor];
+        self.failureLabel.backgroundColor = [UIColor clearColor];
+        self.failureLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     }
-    [self addSubview:_failureLabel];
+    [self addSubview:self.failureLabel];
 }
 
 - (void)showLoading
 {
-    [_failureLabel removeFromSuperview];
+    [self.failureLabel removeFromSuperview];
     
     if (_progressView == nil) {
         _progressView = [[MJPhotoProgressView alloc] init];

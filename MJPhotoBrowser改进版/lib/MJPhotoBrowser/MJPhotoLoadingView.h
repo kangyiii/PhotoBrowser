@@ -14,7 +14,7 @@
 
 @interface MJPhotoLoadingView : UIView
 @property (nonatomic) float progress;
-
+@property (nonatomic,strong) UILabel * failureLabel;
 - (void)showLoading;
 - (void)showFailure;
 @end

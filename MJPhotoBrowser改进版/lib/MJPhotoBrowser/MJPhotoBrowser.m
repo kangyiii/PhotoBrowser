@@ -36,8 +36,6 @@
 - (void)loadView
 {
     _statusBarHiddenInited = [UIApplication sharedApplication].isStatusBarHidden;
-    // 隐藏状态栏
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     self.view = [[UIView alloc] init];
     self.view.frame = [UIScreen mainScreen].bounds;
 	self.view.backgroundColor = [UIColor blackColor];
@@ -137,7 +135,6 @@
 {
     [UIApplication sharedApplication].statusBarHidden = _statusBarHiddenInited;
     self.view.backgroundColor = [UIColor clearColor];
-    
     // 移除工具条
     [_toolbar removeFromSuperview];
 }
@@ -195,7 +192,7 @@
 #pragma mark 显示一个图片view
 - (void)showPhotoViewAtIndex:(NSUInteger)index
 {
-    MJPhotoView *photoView = [self dequeueReusablePhotoView];
+    MJPhotoView *photoView;
     if (!photoView) { // 添加新的图片view
         photoView = [[MJPhotoView alloc] init];
         photoView.photoViewDelegate = self;
@@ -242,15 +239,15 @@
 	return  NO;
 }
 
-#pragma mark 循环利用某个view
-- (MJPhotoView *)dequeueReusablePhotoView
-{
-    MJPhotoView *photoView = [_reusablePhotoViews anyObject];
-	if (photoView) {
-		[_reusablePhotoViews removeObject:photoView];
-	}
-	return photoView;
-}
+//#pragma mark 循环利用某个view
+//- (MJPhotoView *)dequeueReusablePhotoView
+//{
+//    MJPhotoView *photoView = [_reusablePhotoViews anyObject];
+//	if (photoView) {
+//		[_reusablePhotoViews removeObject:photoView];
+//	}
+//	return photoView;
+//}
 
 #pragma mark 更新toolbar状态
 - (void)updateTollbarState
